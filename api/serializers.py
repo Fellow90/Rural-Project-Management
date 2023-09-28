@@ -12,7 +12,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     district = serializers.PrimaryKeyRelatedField(queryset=District.objects.all())
     municipality = serializers.PrimaryKeyRelatedField(queryset=Municipality.objects.all())
     province = serializers.PrimaryKeyRelatedField(queryset=Province.objects.all())
-    
+
     # district = serializers.CharField(source='district.name')
     # municipality = serializers.CharField(source='municipality.name')
     # province = serializers.CharField(source='province.name')
@@ -32,6 +32,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 
 class ExcelSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Excel
         fields = '__all__'
@@ -42,11 +43,13 @@ class SummarySerializer(serializers.Serializer):
     project_count = serializers.IntegerField()
     budget = serializers.DecimalField(decimal_places=2, max_digits=15)
 
+
 class SecondSummarySerializer(serializers.Serializer):
     # id  = serializers.IntegerField()
     name = serializers.CharField(max_length = 200)
     count = serializers.IntegerField()
     budget = serializers.DecimalField(decimal_places= 2, max_digits=15)
+
 
 class ProvinceSerializer(serializers.ModelSerializer):
     districts = serializers.StringRelatedField(read_only = True, many = True)
@@ -61,6 +64,7 @@ class ProvinceSerializer(serializers.ModelSerializer):
 
 class DistrictSerializer(serializers.ModelSerializer):
     municipalities = serializers.StringRelatedField(read_only = True, many = True)
+
     class Meta:
         model = District
         fields = '__all__'
@@ -69,6 +73,7 @@ class DistrictSerializer(serializers.ModelSerializer):
 class MunicipalitySerializer(serializers.ModelSerializer):
     district = serializers.StringRelatedField()
     province = serializers.StringRelatedField()
+    
     class Meta:
         model = Municipality
         fields = '__all__'

@@ -21,10 +21,8 @@ class ProjectViewSet(ModelViewSet):
     serializer_class = ProjectSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ["status", "sector", "province", "agreement_date"]
-
     filter_backends.append(SearchFilter)
     search_fields = ["title"]
-
 
     @action(detail=False, methods=["get"])
     def sector_summary(self, request, *args, **kwargs):
