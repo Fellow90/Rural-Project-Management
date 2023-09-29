@@ -10,4 +10,6 @@ router.register(r'municipality',views.MunicipalityViewSet, basename='municipalit
 
 urlpatterns = [
     path('',include(router.urls)),
+    # path('api-auth/', include('rest_framework.urls')),
+
 ]

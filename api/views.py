@@ -75,7 +75,8 @@ class ProjectViewSet(ModelViewSet):
             budget=Sum("commitments"),
         )
         for i in province_summary:
-            i['name'] = i.pop('province')
+            id = i.pop('province')
+            i['name'] = Province.objects.get(id = id).name
 
         serializer = SummarySerializer(province_summary, many=True)
         summary_data = {
@@ -113,7 +114,8 @@ class ProjectViewSet(ModelViewSet):
             budget = Sum('commitments'),
         )
         for i in municipality_summary:
-            i['name'] = i.pop('municipality')
+            id = i.pop('municipality')
+            i['name'] = Municipality.objects.get(id = id).name
         serializer = SecondSummarySerializer(municipality_summary, many = True)
         return Response(serializer.data)        
 
@@ -125,7 +127,8 @@ class ProjectViewSet(ModelViewSet):
             budget = Sum('commitments'),
         )
         for i in district_summary:
-            i['name'] = i.pop('district')
+            id = i.pop('district')
+            i['name'] = District.objects.get(id = id).name
         serializer = SecondSummarySerializer(district_summary, many = True)
         return Response(serializer.data)     
 
